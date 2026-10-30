@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cortes selecionados, fogo de verdade e hospitalidade gaúcha. Conheça o cardápio da Churrascaria Sabor do Sul.">
+    <meta name="theme-color" content="#181a16">
+    <meta property="og:title" content="Sabor do Sul | Churrasco de excelência">
+    <meta property="og:description" content="Cortes selecionados, fogo de verdade e hospitalidade gaúcha.">
+    <meta property="og:type" content="website">
+    <title>Sabor do Sul | Churrasco de excelência</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="comum.js" defer></script>
+    <script src="cardapio.js" defer></script>
+    <script src="script.js" defer></script>
+    <script src="pedido.js" defer></script>
+</head>
+
+<body>
+    <header class="cabecalho">
+        <a href="#inicio" class="logo" aria-label="Sabor do Sul — início">
+            <span class="logo-selo" aria-hidden="true">SS</span>
+            <span>Sabor <span class="logo-conector">do</span> Sul</span>
+        </a>
+
+        <button class="menu-mobile" id="menuMobile" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="navegacao">☰</button>
+
+        <nav id="navegacao" aria-label="Navegação principal">
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#carnes">Carnes</a></li>
+                <li><a href="#acompanhamentos">Acompanhamentos</a></li>
+                <li><a href="#sobremesas">Sobremesas</a></li>
+                <li><a href="#bebidas">Bebidas</a></li>
+                <li><a href="painel.html">Equipe</a></li>
+                <li><button class="botao-link" id="abrirCarrinho" type="button">Pedido (<span id="qtdCarrinho">0</span>)</button></li>
+                <li><button class="botao-link" id="abrirLogin" type="button">Entrar</button></li>
+                <li><button class="botao-destaque" id="abrirCadastro" type="button">Cadastrar</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <div class="hero-conteudo">
+                <span class="etiqueta">Uma experiência à mesa</span>
+                <h1>O tempo revela<br>o melhor sabor.</h1>
+                <p>Cortes cuidadosamente selecionados, fogo de verdade e a hospitalidade do Sul em cada detalhe.</p>
+                <a class="botao-principal" href="#carnes">Explorar o cardápio <span aria-hidden="true">↗</span></a>
+                <div class="hero-assinatura">
+                    <span aria-hidden="true">✦</span> Da seleção do corte ao último brinde, tudo importa.
+                </div>
+            </div>
+        </section>
+
+        <div class="barra-busca">
+            <input id="busca" type="search" aria-label="Buscar no cardápio" placeholder="Buscar no cardápio: picanha, caipirinha, pudim…" autocomplete="off">
+        </div>
+
+        <section class="secao-cardapio animar" id="carnes">
+            <div class="titulo-secao">
+                <span>Do fogo à mesa</span>
+                <h2>Carnes</h2>
+                <p>Cortes nobres, brasa precisa e respeito ao tempo de cada preparo.</p>
+            </div>
+            <div class="grade-cardapio" id="grade-carnes"></div>
+        </section>
+
+        <section class="secao-cardapio fundo-claro animar" id="acompanhamentos">
+            <div class="titulo-secao">
+                <span>Feitos para compartilhar</span>
+                <h2>Acompanhamentos</h2>
+                <p>Receitas da casa que completam a experiência, sem roubar a cena.</p>
+            </div>
+            <div class="grade-cardapio" id="grade-acompanhamentos"></div>
+        </section>
+
+        <section class="secao-cardapio animar" id="sobremesas">
+            <div class="titulo-secao">
+                <span>Para fechar bem</span>
+                <h2>Sobremesas</h2>
+                <p>Doces da casa para encerrar a refeição.</p>
+            </div>
+            <div class="grade-cardapio" id="grade-sobremesas"></div>
+        </section>
+
+        <section class="secao-cardapio fundo-claro animar" id="bebidas">
+            <div class="titulo-secao">
+                <span>Um brinde à boa mesa</span>
+                <h2>Bebidas</h2>
+                <p>Escolhas para acompanhar cada momento, do primeiro gole ao último.</p>
+            </div>
+            <div class="grade-cardapio" id="grade-bebidas"></div>
+        </section>
+
+        <p class="sem-resultado oculto" id="semResultado">Nenhum item encontrado. Tente outro nome.</p>
+
+        <section class="painel-usuario oculto" id="painelUsuario">
+            <div>
+                <span>Área interna</span>
+                <h2>Olá, <strong id="nomeUsuario"></strong>!</h2>
+                <p>Você entrou como <strong id="funcaoUsuario"></strong>.</p>
+            </div>
+            <div class="acoes-painel" id="acoesPainel"></div>
+            <a class="botao-sair oculto" id="linkGestao" href="painel.html">Gerenciar cardápio</a>
+            <button class="botao-sair" id="botaoSair" type="button">Sair da conta</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="anoAtual"></span> Churrascaria Sabor do Sul.</p>
+        <p>Todos os direitos reservados.</p>
+    </footer>
+
+    <div class="modal" id="modalLogin" aria-hidden="true">
+        <div class="modal-conteudo" role="dialog" aria-modal="true" aria-labelledby="tituloLogin">
+            <button class="fechar-modal" type="button" aria-label="Fechar">×</button>
+            <span class="modal-etiqueta">Área da equipe</span>
+            <h2 id="tituloLogin">Entrar</h2>
+            <form id="formLogin">
+                <label for="emailLogin">E-mail</label>
+                <input id="emailLogin" type="email" placeholder="nome@empresa.com" autocomplete="username" required>
+                <label for="senhaLogin">Senha</label>
+                <input id="senhaLogin" type="password" placeholder="Digite sua senha" minlength="6" autocomplete="current-password" required>
+                <button class="botao-formulario" type="submit">Entrar</button>
+                <p class="mensagem-formulario" id="mensagemLogin" role="alert"></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modalCadastro" aria-hidden="true">
+        <div class="modal-conteudo" role="dialog" aria-modal="true" aria-labelledby="tituloCadastro">
+            <button class="fechar-modal" type="button" aria-label="Fechar">×</button>
+            <span class="modal-etiqueta">Novo colaborador</span>
+            <h2 id="tituloCadastro">Criar cadastro</h2>
+            <form id="formCadastro">
+                <label for="nomeCadastro">Nome completo</label>
+                <input id="nomeCadastro" type="text" placeholder="Digite seu nome" minlength="3" autocomplete="name" required>
+                <label for="emailCadastro">E-mail</label>
+                <input id="emailCadastro" type="email" placeholder="nome@empresa.com" autocomplete="email" required>
+                <label for="funcaoCadastro">Função</label>
+                <select id="funcaoCadastro" required>
+                    <option value="">Selecione uma função</option>
+                    <option value="Dono">Dono</option>
+                    <option value="Gerente">Gerente</option>
+                    <option value="Chef">Chef</option>
+                    <option value="Garçom">Garçom</option>
+                </select>
+                <label for="senhaCadastro">Senha</label>
+                <input id="senhaCadastro" type="password" placeholder="Mínimo de 6 caracteres" minlength="6" autocomplete="new-password" required>
+                <label for="confirmarSenha">Confirmar senha</label>
+                <input id="confirmarSenha" type="password" placeholder="Digite a senha novamente" minlength="6" autocomplete="new-password" required>
+                <button class="botao-formulario" type="submit">Criar cadastro</button>
+                <p class="mensagem-formulario" id="mensagemCadastro" role="alert"></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modalPedido" aria-hidden="true">
+        <div class="modal-conteudo" role="dialog" aria-modal="true" aria-labelledby="tituloPedido">
+            <button class="fechar-modal" type="button" aria-label="Fechar">×</button>
+            <span class="modal-etiqueta">Pedidos das mesas</span>
+            <h2 id="tituloPedido">Pedido e pagamento</h2>
+
+            <p class="aviso-permissao oculto" id="avisoPermissao" role="status"></p>
+
+            <div id="blocoNovoPedido">
+                <label for="mesaNova">Novo pedido: qual é a mesa?</label>
+                <div class="linha-nova-mesa">
+                    <select id="mesaNova"></select>
+                    <button class="botao-add" id="botaoNovoPedido" type="button">Novo pedido</button>
+                </div>
+            </div>
+
+            <div class="mesas-abertas oculto" id="mesasAbertas" role="tablist" aria-label="Mesas com pedido aberto"></div>
+
+            <p class="vazio-pedido" id="pedidoVazio"></p>
+
+            <div class="oculto" id="pedidoDaMesa">
+                <div class="cabecalho-mesa">
+                    <strong id="tituloMesa"></strong>
+                    <small id="infoMesa"></small>
+                </div>
+                <ul class="lista-pedido" id="listaPedido"></ul>
+                <button class="botao-add" id="botaoCancelarPedido" type="button">Cancelar pedido da mesa</button>
+            </div>
+
+            <form id="formPedido">
+                <div id="blocoPagamento" class="oculto">
+                    <div class="total-pedido"><span>Total</span><strong id="totalPedido">R$ 0,00</strong></div>
+
+                    <label for="nomePedido">Nome do cliente (opcional)</label>
+                    <input id="nomePedido" type="text" placeholder="Ex.: João" maxlength="40" autocomplete="off">
+
+                    <label for="formaPagamento">Forma de pagamento</label>
+                    <select id="formaPagamento">
+                        <option value="pix">Pix</option>
+                        <option value="credito">Cartão de crédito</option>
+                        <option value="debito">Cartão de débito</option>
+                        <option value="dinheiro">Dinheiro</option>
+                    </select>
+
+                    <div class="campos-pagamento" id="camposPix">
+                        <label for="codigoPix">Pix copia e cola</label>
+                        <input id="codigoPix" type="text" readonly>
+                        <p class="aviso-demo">Código de demonstração. Em produção, ele é gerado pelo provedor de pagamento.</p>
+                    </div>
+
+                    <div class="campos-pagamento oculto" id="camposCartao">
+                        <label for="numeroCartao">Número do cartão</label>
+                        <input id="numeroCartao" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000">
+                        <label for="nomeCartao">Nome impresso no cartão</label>
+                        <input id="nomeCartao" type="text" autocomplete="cc-name" placeholder="Como está no cartão">
+                        <div class="dupla">
+                            <div>
+                                <label for="validadeCartao">Validade</label>
+                                <input id="validadeCartao" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA">
+                            </div>
+                            <div>
+                                <label for="cvvCartao">CVV</label>
+                                <input id="cvvCartao" type="password" inputmode="numeric" autocomplete="cc-csc" placeholder="123">
+                            </div>
+                        </div>
+                        <p class="aviso-demo">Demonstração: os dados do cartão são validados, mas nunca salvos.</p>
+                    </div>
+
+                    <div class="campos-pagamento oculto" id="camposDinheiro">
+                        <label for="trocoPara">Troco para (opcional)</label>
+                        <input id="trocoPara" type="text" inputmode="decimal" placeholder="Ex.: 100">
+                    </div>
+
+                    <button class="botao-formulario" type="submit">Finalizar pedido</button>
+                </div>
+                <p class="mensagem-formulario" id="mensagemPedido" role="alert"></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="notificacao" id="notificacao" role="status"></div>
+</body>
+
+</html>

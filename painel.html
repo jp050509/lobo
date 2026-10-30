@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#181a16">
+    <meta name="robots" content="noindex">
+    <title>Área da equipe | Sabor do Sul</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="comum.js" defer></script>
+    <script src="painel.js" defer></script>
+</head>
+
+<body>
+    <header class="cabecalho">
+        <a href="index.html" class="logo" aria-label="Sabor do Sul — voltar ao site">
+            <span class="logo-selo" aria-hidden="true">SS</span>
+            <span>Sabor <span class="logo-conector">do</span> Sul</span>
+        </a>
+        <a class="botao-link" href="index.html">← Voltar ao cardápio</a>
+    </header>
+
+    <main class="painel-pagina">
+
+        <!-- ===== Acesso: entrar ou cadastrar ===== -->
+        <section class="cartao-painel estreito" id="telaAcesso">
+            <span class="modal-etiqueta">Área da equipe</span>
+            <h1>Acesso dos funcionários</h1>
+
+            <div class="abas" role="tablist">
+                <button class="aba" id="abaLogin" type="button" role="tab" aria-selected="true">Entrar</button>
+                <button class="aba" id="abaCadastro" type="button" role="tab" aria-selected="false">Cadastrar</button>
+            </div>
+
+            <form id="formLogin">
+                <label for="emailLogin">E-mail</label>
+                <input id="emailLogin" type="email" placeholder="nome@empresa.com" autocomplete="username" required>
+                <label for="senhaLogin">Senha</label>
+                <input id="senhaLogin" type="password" placeholder="Digite sua senha" minlength="6" autocomplete="current-password" required>
+                <button class="botao-formulario" type="submit">Entrar</button>
+                <p class="mensagem-formulario" id="mensagemLogin" role="alert"></p>
+            </form>
+
+            <form id="formCadastro" class="oculto">
+                <label for="nomeCadastro">Nome completo</label>
+                <input id="nomeCadastro" type="text" placeholder="Digite seu nome" minlength="3" autocomplete="name" required>
+                <label for="emailCadastro">E-mail</label>
+                <input id="emailCadastro" type="email" placeholder="nome@empresa.com" autocomplete="email" required>
+                <label for="funcaoCadastro">Cargo</label>
+                <select id="funcaoCadastro" required>
+                    <option value="">Selecione um cargo</option>
+                    <option value="Dono">Dono</option>
+                    <option value="Gerente">Gerente</option>
+                    <option value="Chef">Chef</option>
+                    <option value="Garçom">Garçom</option>
+                </select>
+                <label for="senhaCadastro">Senha</label>
+                <input id="senhaCadastro" type="password" placeholder="Mínimo de 6 caracteres" minlength="6" autocomplete="new-password" required>
+                <label for="confirmarSenha">Confirmar senha</label>
+                <input id="confirmarSenha" type="password" placeholder="Digite a senha novamente" minlength="6" autocomplete="new-password" required>
+                <button class="botao-formulario" type="submit">Criar cadastro</button>
+                <p class="mensagem-formulario" id="mensagemCadastro" role="alert"></p>
+            </form>
+        </section>
+
+        <!-- ===== Gestão do cardápio (após o login) ===== -->
+        <div class="oculto" id="telaGestao">
+            <section class="cartao-painel topo-gestao">
+                <div>
+                    <span class="modal-etiqueta">Cargo: <span id="cargoAtual"></span></span>
+                    <h1 id="saudacao"></h1>
+                </div>
+                <button class="botao-formulario" id="botaoSair" type="button">Sair da conta</button>
+            </section>
+
+            <p class="aviso-permissao oculto" id="avisoSemPermissao">
+                Seu cargo não pode alterar o cardápio. Peça ao chef, gerente ou dono.
+            </p>
+
+            <div id="blocoCardapio" class="oculto">
+                <section class="cartao-painel">
+                    <h2>Incluir item no cardápio</h2>
+                    <form id="formItem">
+                        <label for="categoriaItem">Categoria</label>
+                        <select id="categoriaItem" required>
+                            <option value="carnes">Carnes</option>
+                            <option value="acompanhamentos">Acompanhamentos</option>
+                            <option value="sobremesas">Sobremesas</option>
+                            <option value="bebidas">Bebidas</option>
+                        </select>
+
+                        <label for="nomeItem">Nome do item</label>
+                        <input id="nomeItem" type="text" placeholder="Ex.: Entrecot" minlength="2" maxlength="40" required>
+
+                        <label for="descricaoItem">Descrição (opcional)</label>
+                        <input id="descricaoItem" type="text" placeholder="Ex.: Corte alto, grelhado no ponto" maxlength="90">
+
+                        <div class="dupla">
+                            <div>
+                                <label for="precoItem">Preço (R$)</label>
+                                <input id="precoItem" type="text" inputmode="decimal" placeholder="49,90" required>
+                            </div>
+                            <div>
+                                <label for="iconeItem">Ícone</label>
+                                <select id="iconeItem">
+                                    <option value="🥩">🥩 Carne</option>
+                                    <option value="🍖">🍖 Costela</option>
+                                    <option value="🍗">🍗 Frango</option>
+                                    <option value="🌭">🌭 Linguiça</option>
+                                    <option value="🥓">🥓 Porco</option>
+                                    <option value="🧀">🧀 Queijo</option>
+                                    <option value="🍚">🍚 Arroz e grãos</option>
+                                    <option value="🥗">🥗 Salada</option>
+                                    <option value="🍟">🍟 Fritura</option>
+                                    <option value="🥔">🥔 Batata</option>
+                                    <option value="🍮">🍮 Sobremesa</option>
+                                    <option value="🍨">🍨 Sorvete</option>
+                                    <option value="🥤">🥤 Refrigerante</option>
+                                    <option value="🍺">🍺 Cerveja</option>
+                                    <option value="🍷">🍷 Vinho</option>
+                                    <option value="🍹">🍹 Drink</option>
+                                    <option value="☕">☕ Café</option>
+                                    <option value="🍽️">🍽️ Outro</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button class="botao-formulario" type="submit">Incluir no cardápio</button>
+                        <p class="mensagem-formulario" id="mensagemItem" role="alert"></p>
+                    </form>
+                </section>
+
+                <section class="cartao-painel">
+                    <h2>Itens incluídos pela equipe</h2>
+                    <p class="vazio-pedido" id="listaVazia">Nenhum item incluído ainda. Use o formulário acima.</p>
+                    <ul class="lista-pedido" id="listaItens"></ul>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div class="notificacao" id="notificacao" role="status"></div>
+</body>
+
+</html>
